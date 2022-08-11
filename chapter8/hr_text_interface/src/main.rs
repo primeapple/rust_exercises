@@ -15,14 +15,14 @@ fn main() {
             Action::Add(employee, department) => {
                 let employees = map.entry(department).or_insert(Vec::new());
                 employees.push(employee);
-                employees.sort_unstable();
             },
             Action::List(department) => {
-                let employees = map.get(&department);
+                let employees = map.get_mut(&department);
                 if let Some(employees) = employees  {
+                    employees.sort_unstable();
                     println!("Department '{}' has employees {:?}", department, employees);
                 } else {
-                    println!("Department '{}' has has no employees yest", department);
+                    println!("Department '{}' has has no employees yet", department);
                 }
             },
             Action::Quit => {
